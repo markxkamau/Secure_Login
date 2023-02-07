@@ -37,4 +37,11 @@ public class UserService {
     private String getPasswordHash(String password) {
         return null;
     }
+
+    public boolean checkPassword(String password, String confirmPassword) {
+        if (password.equals(confirmPassword)){
+            return true;
+        }
+        return false;
+    }
 }

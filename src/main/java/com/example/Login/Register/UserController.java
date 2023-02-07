@@ -24,7 +24,11 @@ public class UserController {
 
     @PostMapping("/new_user")
     public String postNewUser(@ModelAttribute RegisterDto registerDto, @NotNull Model model) {
+        if (!userService.checkPassword(registerDto.getPassword(),registerDto.getConfirmPassword())){
+            model.addAttribute("password_error","Check password and try again");
+            return "redirect:/user/new_user";
+        }
         userService.createLogin(registerDto, userService.createUser(registerDto));
-        return "Login";
+        return "redirect:/login";
     }
 }
