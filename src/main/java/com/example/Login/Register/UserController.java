@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/user")
@@ -23,9 +24,9 @@ public class UserController {
     }
 
     @PostMapping("/new_user")
-    public String postNewUser(@ModelAttribute RegisterDto registerDto, @NotNull Model model) {
+    public String postNewUser(@ModelAttribute RegisterDto registerDto, @NotNull RedirectAttributes redirectAttributes) {
         if (!userService.checkPassword(registerDto.getPassword(),registerDto.getConfirmPassword())){
-            model.addAttribute("password_error","Check password and try again");
+            redirectAttributes.addFlashAttribute("password_error","Check password and try again");
             return "redirect:/user/new_user";
         }
         userService.createLogin(registerDto, userService.createUser(registerDto));
