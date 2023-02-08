@@ -13,17 +13,12 @@ public class UserService {
     @Autowired
     private LoginRepository loginRepository;
 
-    public void createUser(RegisterDto registerDto) {
+    public UserInfo createUser(RegisterDto registerDto) {
         UserInfo userInfo = new UserInfo(registerDto.getId(), registerDto.getFirstName(), registerDto.getLastName());
-        userRepository.save(userInfo);
+        return userInfo;
     }
 
-    public void createLogin(RegisterDto registerDto) {
-        UserInfo userInfo = new UserInfo(
-                registerDto.getId(),
-                registerDto.getFirstName(),
-                registerDto.getLastName()
-        );
+    public void createLogin(RegisterDto registerDto, UserInfo userInfo) {
         UserLogin userLogin = new UserLogin(
                 registerDto.getId(),
                 registerDto.getEmail(),
@@ -31,6 +26,7 @@ public class UserService {
                 registerDto.getConfirmPassword(),
                 userInfo
         );
+        userRepository.save(userInfo);
         loginRepository.save(userLogin);
     }
 

@@ -29,9 +29,7 @@ public class UserController {
             redirectAttributes.addFlashAttribute("password_error", "Check password and try again");
             return "redirect:/user/new_user";
         }
-        userService.createUser(registerDto);
-
-        userService.createLogin(registerDto);
-        return "Login_Page";
+        userService.createLogin(registerDto,userService.createUser(registerDto));
+        return "redirect:/login";
     }
 }

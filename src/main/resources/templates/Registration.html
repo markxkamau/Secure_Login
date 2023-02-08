@@ -5,7 +5,7 @@
     <title>Registration</title>
 </head>
 <body>
-<form th:action="@{/userInfo/new_user}" th:object="${user_info}" method="post">
+<form th:action="@{/user/new_user}" th:object="${user_info}" method="post">
     <div>
         <label for="firstname">FirstName:</label>
         <input type="text" id="firstname" name="firstname" th:field="*{firstName}"required>
