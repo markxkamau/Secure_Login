@@ -25,11 +25,13 @@ public class UserController {
 
     @PostMapping("/new_user")
     public String postNewUser(@ModelAttribute RegisterDto registerDto, @NotNull RedirectAttributes redirectAttributes) {
-        if (!userService.checkPassword(registerDto.getPassword(),registerDto.getConfirmPassword())){
-            redirectAttributes.addFlashAttribute("password_error","Check password and try again");
+        if (!userService.checkPassword(registerDto.getPassword(), registerDto.getConfirmPassword())) {
+            redirectAttributes.addFlashAttribute("password_error", "Check password and try again");
             return "redirect:/user/new_user";
         }
-        userService.createLogin(registerDto, userService.createUser(registerDto));
-        return "redirect:/login";
+        userService.createUser(registerDto);
+
+        userService.createLogin(registerDto);
+        return "Login_Page";
     }
 }

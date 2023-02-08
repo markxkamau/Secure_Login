@@ -13,21 +13,25 @@ public class UserService {
     @Autowired
     private LoginRepository loginRepository;
 
-    public User createUser(RegisterDto registerDto) {
-        User user = new User(registerDto.getFirstName(), registerDto.getLastName());
-        return user;
+    public void createUser(RegisterDto registerDto) {
+        UserInfo userInfo = new UserInfo(registerDto.getId(), registerDto.getFirstName(), registerDto.getLastName());
+        userRepository.save(userInfo);
     }
 
-    public void createLogin(RegisterDto registerDto, User user) {
-        UserLogin userLogin = new UserLogin(
-                registerDto.getEmail(),
-                getPasswordHash(registerDto.getPassword()),
-                getPasswordSalt(),
-                user
+    public void createLogin(RegisterDto registerDto) {
+        UserInfo userInfo = new UserInfo(
+                registerDto.getId(),
+                registerDto.getFirstName(),
+                registerDto.getLastName()
         );
-        userRepository.save(user);
+        UserLogin userLogin = new UserLogin(
+                registerDto.getId(),
+                registerDto.getEmail(),
+                registerDto.getPassword(),
+                registerDto.getConfirmPassword(),
+                userInfo
+        );
         loginRepository.save(userLogin);
-
     }
 
     private String getPasswordSalt() {
@@ -39,7 +43,7 @@ public class UserService {
     }
 
     public boolean checkPassword(String password, String confirmPassword) {
-        if (password.equals(confirmPassword)){
+        if (password.equals(confirmPassword)) {
             return true;
         }
         return false;

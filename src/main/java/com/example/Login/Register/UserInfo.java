@@ -1,11 +1,9 @@
 package com.example.Login.Register;
 
-import com.example.Login.Login.UserLogin;
-
 import javax.persistence.*;
 
 @Entity
-public class User {
+public class UserInfo {
     @Id
     @SequenceGenerator(
             name = "user_sequence",
@@ -20,16 +18,16 @@ public class User {
     private String firstName;
     private String lastName;
 
-    public User() {
+    public UserInfo() {
     }
 
-    public User(Long id, String firstName, String lastName) {
+    public UserInfo(Long id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public User(String firstName, String lastName) {
+    public UserInfo(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }

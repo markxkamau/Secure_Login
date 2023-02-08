@@ -1,6 +1,6 @@
 package com.example.Login.Login;
 
-import com.example.Login.Register.User;
+import com.example.Login.Register.UserInfo;
 
 import javax.persistence.*;
 
@@ -21,24 +21,24 @@ public class UserLogin {
     private String passwordHash;
     private String passwordSalt;
     @OneToOne
-    private User user;
+    private UserInfo userInfo;
 
     public UserLogin() {
     }
 
-    public UserLogin(String email, String passwordHash, String passwordSalt, User user) {
+    public UserLogin(String email, String passwordHash, String passwordSalt, UserInfo userInfo) {
         this.email = email;
         this.passwordHash = passwordHash;
         this.passwordSalt = passwordSalt;
-        this.user = user;
+        this.userInfo = userInfo;
     }
 
-    public UserLogin(Long id, String email, String passwordHash, String passwordSalt, User user) {
+    public UserLogin(Long id, String email, String passwordHash, String passwordSalt, UserInfo userInfo) {
         this.id = id;
         this.email = email;
         this.passwordHash = passwordHash;
         this.passwordSalt = passwordSalt;
-        this.user = user;
+        this.userInfo = userInfo;
     }
 
     public Long getId() {
@@ -73,11 +73,11 @@ public class UserLogin {
         this.passwordSalt = passwordSalt;
     }
 
-    public User getUser() {
-        return user;
+    public UserInfo getUser() {
+        return userInfo;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 }
