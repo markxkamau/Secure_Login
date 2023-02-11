@@ -6,9 +6,19 @@
 </head>
 <body>
 <div>
-    <div th:text="'FirstName: '+${session.user_info.firstName}">Username</div>
-    <div th:text="'LastName: '+${session.user_info.lastName}">Username</div>
-    <a th:href="@{/logout}"><button type="submit">LogOut</button></a>
+    <div th:text="'FirstName: '+${user_info.firstName}">Username</div>
+    <div th:text="'LastName: '+${user_info.lastName}">Username</div>
+    <a th:href="@{/logout}">
+        <button type="submit" onclick="logout()">LogOut</button>
+    </a>
+
 </div>
+<script>
+    function logout(){
+    //window.location.replace("/login")
+    // history.pushState(null, null, '/');
+     }
+
+</script>
 </body>
 </html>

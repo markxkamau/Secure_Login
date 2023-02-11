@@ -25,13 +25,19 @@ public class LoginController {
         model.addAttribute("login_info", new LoginDto());
         return "Login_Page";
     }
+
     @GetMapping("/logout")
     public String logout(HttpSession session, HttpServletResponse response) {
         session.invalidate();
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.setHeader("Pragma", "no-cache");
         response.setDateHeader("Expires", 0);
-        return "redirect:/reference";
+
+        Cookie sessionCookie = new Cookie("JSESSIONID", "");
+        sessionCookie.setMaxAge(0);
+        sessionCookie.setHttpOnly(true);
+        response.addCookie(sessionCookie);
+        return "redirect:/login";
     }
 
     @GetMapping("/reference")
